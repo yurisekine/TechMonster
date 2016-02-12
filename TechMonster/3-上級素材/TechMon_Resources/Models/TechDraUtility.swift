@@ -51,7 +51,7 @@ class TechDraUtility: NSObject, AVAudioPlayerDelegate {
         
         //AVAudioPlayer
         let soundFilePath = NSBundle.mainBundle().pathForResource(fileName, ofType: "mp3")!
-        let fileURL: NSURL = NSURL(fileURLWithPath: soundFilePath)
+        let fileURL: NSURL = NSURL(fileURLWithPath: soundFilePath)  //
         /*
         //TODO: fix unwrapping error
         var error: NSError? = nil
@@ -59,14 +59,15 @@ class TechDraUtility: NSObject, AVAudioPlayerDelegate {
         */
         do {
             SE_audioPlayer = try AVAudioPlayer(contentsOfURL: fileURL)
+        } catch {
+           print("ファイルの読み込みに失敗しました")
+        }
             SE_audioPlayer.prepareToPlay()
             if SE_audioPlayer.playing == true {
             SE_audioPlayer.currentTime = 0
             }
             SE_audioPlayer.play()
-        } catch {
-            
-        }
+
 
         /*
         // AudioToolBox
@@ -87,20 +88,20 @@ class TechDraUtility: NSObject, AVAudioPlayerDelegate {
         NSLog("%@", error!)
         */
         do {
-            BGM_audioPlayer = try AVAudioPlayer(contentsOfURL: fileURL)
-            BGM_audioPlayer.numberOfLoops = -1
-            BGM_audioPlayer.delegate = self
-            BGM_audioPlayer.prepareToPlay()
-            if BGM_audioPlayer.playing == true {
-                BGM_audioPlayer.currentTime = 0
-            }
-        
-            BGM_audioPlayer.play()
+            BGM_audioPlayer = try AVAudioPlayer(contentsOfURL: fileURL, fileTypeHint: nil)
         } catch {
-            
+            print("ファイルの読み込みに失敗しました")
         }
+        BGM_audioPlayer.numberOfLoops = -1
+        BGM_audioPlayer.delegate = self
+        BGM_audioPlayer.prepareToPlay()
+        if BGM_audioPlayer.playing == true {
+            BGM_audioPlayer.currentTime = 0
+        }
+        
+        BGM_audioPlayer.play()
     }
-    
+
     func stopBGM() {
         BGM_audioPlayer.stop()
     }

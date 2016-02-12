@@ -54,17 +54,26 @@ class LobbyViewController: UIViewController, AVAudioPlayerDelegate {
     
     
     func cureStamina() {
+        
         staminaTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateStaminaValue", userInfo: nil, repeats: true)
+//        staminaTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateStaminaValue", userInfo: nil, repeats: true)
         staminaTimer.fire()
     }
     
-    
-    func updateStaminaVaule() {
+    func updateStaminaValue() {
         if stamina <= 100 {
             stamina = stamina + 1
             staminaBar.progress = stamina / 100
         }
     }
+    
+    
+   /* func updateStaminaVaule() {
+        if stamina <= 100 {
+            stamina = stamina + 1
+            staminaBar.progress = stamina / 100
+        }
+    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

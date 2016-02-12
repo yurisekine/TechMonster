@@ -1,4 +1,4 @@
-//
+
 //  ViewController.swift
 //  TechMonster
 //
@@ -130,7 +130,7 @@ class ViewController: UIViewController {
     }
     
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
         util.playBGM("BGM_battle001")
     }
     
